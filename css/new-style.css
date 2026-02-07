@@ -1,0 +1,54 @@
+:root {
+    --shell: #F7F5F1;
+    --stone: #E0DCD1;
+    --sky: #D5E3E8;
+    --honeydew: #E4E3BC;
+    --viridian: #344945;
+  }
+  .btn-primary {
+      color: #000;
+      background-color: var(--viridian) !important;
+      border-color: var(--viridian) !important;
+  }
+  nav .nav-link.active {
+    color: var(--honeydew) !important;
+}
+.navbar-light .navbar-nav .nav-link {
+    color: var(--viridian) !important;
+    font-weight: 500;
+}
+
+
+.text-primary {
+    color: var(--stone) !important;
+}
+
+
+h1, .h1, h2, .h2, h3, .h3, h4, .h4, h5, .h5, h6, .h6 {
+    color: var(--viridian) !important;}
+    .service-item {
+        background: var(--shell) !important;}
+        .service-item:hover {
+            background-color: var(--sky) !important;
+            color: var(--viridian) !important;
+        }
+        .service-item:hover * {
+            color: var(--viridian) !important;
+        }
+        .bg-light {
+            background-color: var(--sky) !important;
+        }
+
+        .testimonial-carousel .owl-item.center .testimonial-text  {
+            background: var(--stone) !important;
+            color:var(--viridian) !important;
+        }
+        .testimonial-carousel .owl-item.center .testimonial-text * {
+            color: var(--viridian) !important;
+        }
+        .bg-dark {
+            background-color: var(--viridian) !important;
+        }
+        .text-light {
+            color: var(--shell) !important;
+        }
