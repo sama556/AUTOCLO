@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <title>OBE Reports - AUTOCLO</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description"
+    content="View and download analytical outcome-based education reports in different formats. Static demo data in English.">
+
+  <link href="../img/AUTOCLO LOGO.png" rel="icon">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&display=swap"
+    rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css"
+    rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css"
+    rel="stylesheet">
+  <link href="css/bootstrap.min.css" rel="stylesheet">
+  <link href="css/style.css" rel="stylesheet">
+  <link href="css/new-style.css" rel="stylesheet">
+  <link href="css/dashboard.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
+</head>
+
+<body>
+  <!-- Navbar Start -->
+  <nav class="navbar navbar-expand-lg bg-white navbar-light shadow sticky-top p-0">
+    <a href="../index.html" class="navbar-brand d-flex align-items-center px-4 px-lg-5">
+      <img src="../img/AUTOCLO LOGO.png" alt="AUTOCLO" height="40" class="me-2"><span
+        class="text-dark fw-bold">AUTOCLO</span>
+    </a>
+    <button type="button" class="navbar-toggler me-4" data-bs-toggle="collapse"
+      data-bs-target="#navbarCollapse">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    
+    </div>
+  </nav>
+  <!-- Navbar End -->
+
+  <main class="dashboard-wrapper">
+    <div class="container-fluid">
+      <div class="dashboard-layout">
+        <!-- Sidebar -->
+        <aside class="dashboard-sidebar">
+          <div class="sidebar-header">
+            <div class="avatar">
+              <span>IN</span>
+            </div>
+            <div>
+              <strong class="sidebar-name">Dr. Instructor Name</strong>
+              <small class="sidebar-meta">Computer Science · AUTOCLO</small>
+            </div>
+          </div>
+          <nav class="sidebar-nav">
+            <a class="sidebar-link" href="dashboard.html">
+              <i class="fa fa-tachometer-alt"></i>
+              <span>Overview</span>
+            </a>
+            <a class="sidebar-link" href="los.html">
+              <i class="fa fa-bullseye"></i>
+              <span>Learning Outcomes</span>
+            </a>
+            <a class="sidebar-link" href="assessments.html">
+              <i class="fa fa-clipboard-check"></i>
+              <span>Assessments &amp; Grades</span>
+            </a>
+            <a class="sidebar-link" href="grades-entry.html">
+              <i class="fa fa-edit"></i>
+              <span>Grades Entry</span>
+            </a>
+            <a class="sidebar-link" href="performance.html">
+              <i class="fa fa-chart-line"></i>
+              <span>Performance Analysis</span>
+            </a>
+            <a class="sidebar-link active" href="reports.html">
+              <i class="fa fa-file-alt"></i>
+              <span>OBE Reports</span>
+            </a>
+            <a class="sidebar-link" href="career.html">
+              <i class="fa fa-user-graduate"></i>
+              <span>Career Recommendations</span>
+            </a>
+           
+          </nav>
+          <button class="sidebar-logout" type="button" onclick="handleLogout()">
+            <i class="fa fa-sign-out-alt me-2"></i>Logout
+          </button>
+        </aside>
+
+        <!-- Main content -->
+        <div class="dashboard-main">
+          <section class="dashboard-section">
+            <div class="dashboard-section-header">
+              <h5><i class="fa fa-file-alt me-2"></i>Report Management</h5>
+              <small>View analytical reports, select format, and download</small>
+            </div>
+
+            <div class="card-elevated mt-4">
+              <div class="card-elevated-header">
+                <h6>Generate New Report</h6>
+              </div>
+              <div class="card-elevated-body">
+                <form id="generateReportForm" class="row g-3 align-items-end">
+                  <div class="col-md-4">
+                    <label for="reportScope" class="form-label">Scope</label>
+                    <select class="form-select" id="reportScope" name="scope">
+                      <option value="CS101-SEC-A">CS101 – Introduction to Programming (SEC-A)</option>
+                      <option value="CS231-ALL">CS231 – Data Structures (all sections)</option>
+                      <option value="DEPT-ALL">Computer Science Department (all courses)</option>
+                    </select>
+                  </div>
+                  <div class="col-md-3">
+                    <label for="reportFormat" class="form-label">Format</label>
+                    <select class="form-select" id="reportFormat" name="format">
+                      <option value="PDF">PDF</option>
+                      <option value="DOCX">DOCX</option>
+                      <option value="HTML">HTML</option>
+                    </select>
+                  </div>
+                  <div class="col-md-3">
+                    <button type="submit" class="btn btn-primary w-100">
+                      <i class="fa fa-magic me-1"></i>Generate Report
+                    </button>
+                  </div>
+                </form>
+              
+              </div>
+            </div>
+
+            <div class="card-elevated mt-4">
+              <div class="card-elevated-header">
+                <h6>Report Preview (Text)</h6>
+              </div>
+              <div class="card-elevated-body">
+                <div id="reportPreview" class="border rounded p-3 bg-light small" style="max-height: 320px; overflow-y: auto;">
+                  <strong>CS101 – LO Achievement Report</strong><br>
+                  <span class="text-muted">Fall 2026 · Generated 2026-10-10</span>
+                  <hr class="my-2">
+                  <p class="mb-2">This report summarizes learning outcome achievement for CS101 – Introduction to Programming (SEC-A). Data is based on linked assessments and grade distributions.</p>
+                  <p class="mb-2"><strong>LO1 – Programming fundamentals:</strong> 87% of students met or exceeded the benchmark. Gemini insight: "Strong baseline; consider more practice on edge cases in assignments."</p>
+                  <p class="mb-2"><strong>LO2 – Problem solving:</strong> 82% achieved benchmark. Narrative section generated by Gemini with recommendations for supplementary exercises.</p>
+                  <p class="mb-2"><strong>LO3 – Code quality:</strong> 79% met benchmark. Slight improvement suggested in rubric clarity and peer review activities.</p>
+                  <p class="mb-0">Overall course outcome alignment is satisfactory. Export to PDF, DOCX, or HTML will include the full narrative and charts once the backend is deployed.</p>
+                </div>
+               
+            </div>
+          </section>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- Footer Start -->
+  <div class="container-fluid bg-dark text-light footer pt-5 mt-5">
+   
+    <div class="container">
+      <div class="copyright">
+        <div class="row">
+          <div class="col-md-6 text-center text-md-start mb-3 mb-md-0">
+            &copy; <a class="border-bottom" href="../index.html">AUTOCLO</a>, All Right Reserved.
+          </div>
+         
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Footer End -->
+
+ 
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
+  <script src="js/reports.js"></script>
+
+</body>
+
+</html>
+

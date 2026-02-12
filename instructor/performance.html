@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <title>Performance Analysis - AUTOCLO</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description"
+    content="View learning outcome achievement rates and AI-style insights on student performance. Static demo data in English.">
+
+  <link href="../img/AUTOCLO LOGO.png" rel="icon">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&display=swap"
+    rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css"
+    rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css"
+    rel="stylesheet">
+  <link href="../css/bootstrap.min.css" rel="stylesheet">
+  <link href="../css/style.css" rel="stylesheet">
+  <link href="../css/new-style.css" rel="stylesheet">
+  <link href="css/dashboard.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+  <style>
+    .chart-container {
+      margin-bottom: 2.5rem;
+    }
+    .chart-label {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1rem;
+      font-size: 0.9rem;
+    }
+    .chart-label strong {
+      color: var(--viridian, #344945);
+      font-weight: 600;
+    }
+    .chart-wrapper {
+      position: relative;
+      height: 60px;
+      margin-bottom: 0.5rem;
+    }
+    .ai-insights-content {
+      display: none;
+    }
+    .ai-insights-content.show {
+      display: block;
+    }
+    .ai-loading {
+      display: none;
+      text-align: center;
+      padding: 2rem;
+      color: rgba(52, 73, 69, 0.7);
+    }
+    .ai-loading.show {
+      display: block;
+    }
+    .ai-insights-content p {
+      margin-bottom: 1rem;
+      line-height: 1.6;
+    }
+    .ai-insights-content strong {
+      color: var(--viridian, #344945);
+    }
+  </style>
+</head>
+
+<body>
+  <!-- Navbar Start -->
+  <nav class="navbar navbar-expand-lg bg-white navbar-light shadow sticky-top p-0">
+    <a href="../index.html" class="navbar-brand d-flex align-items-center px-4 px-lg-5">
+      <img src="../img/AUTOCLO LOGO.png" alt="AUTOCLO" height="40" class="me-2"><span
+        class="text-dark fw-bold">AUTOCLO</span>
+    </a>
+    <button type="button" class="navbar-toggler me-4" data-bs-toggle="collapse"
+      data-bs-target="#navbarCollapse">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    
+    </div>
+  </nav>
+  <!-- Navbar End -->
+
+  <main class="dashboard-wrapper">
+    <div class="container-fluid">
+      <div class="dashboard-layout">
+        <!-- Sidebar -->
+        <aside class="dashboard-sidebar">
+          <div class="sidebar-header">
+            <div class="avatar">
+              <span>IN</span>
+            </div>
+            <div>
+              <strong class="sidebar-name">Dr. Instructor Name</strong>
+              <small class="sidebar-meta">Computer Science · AUTOCLO</small>
+            </div>
+          </div>
+          <nav class="sidebar-nav">
+            <a class="sidebar-link" href="dashboard.html">
+              <i class="fa fa-tachometer-alt"></i>
+              <span>Overview</span>
+            </a>
+            <a class="sidebar-link" href="los.html">
+              <i class="fa fa-bullseye"></i>
+              <span>Learning Outcomes</span>
+            </a>
+            <a class="sidebar-link" href="assessments.html">
+              <i class="fa fa-clipboard-check"></i>
+              <span>Assessments &amp; Grades</span>
+            </a>
+            <a class="sidebar-link" href="grades-entry.html">
+              <i class="fa fa-pen"></i>
+              <span>Grades Entry</span>
+            </a>
+            <a class="sidebar-link active" href="performance.html">
+              <i class="fa fa-chart-line"></i>
+              <span>Performance Analysis</span>
+            </a>
+            <a class="sidebar-link" href="reports.html">
+              <i class="fa fa-file-alt"></i>
+              <span>OBE Reports</span>
+            </a>
+            <a class="sidebar-link" href="career.html">
+              <i class="fa fa-user-graduate"></i>
+              <span>Career Recommendations</span>
+            </a>
+          
+          </nav>
+          <button class="sidebar-logout" type="button" onclick="handleLogout()">
+            <i class="fa fa-sign-out-alt me-2"></i>Logout
+          </button>
+        </aside>
+
+        <!-- Main content -->
+        <div class="dashboard-main">
+          <section class="dashboard-section">
+            <div class="dashboard-section-header">
+              <div>
+                <h5><i class="fa fa-chart-line me-2"></i>Performance Analysis</h5>
+               
+              </div>
+            </div>
+
+            <!-- LO Achievement Charts -->
+            <div class="card-elevated mb-4">
+              <div class="card-elevated-header">
+                <h6>Learning Outcome Achievement vs. Benchmarks</h6>
+              </div>
+              <div class="card-elevated-body">
+                <!-- LO-CS231-1 Chart -->
+                <div class="chart-container">
+                  <div class="chart-label">
+                    <div>
+                      <strong>LO-CS231-1:</strong> Analyze algorithm complexity
+                      <small class="text-muted ms-2">(CS231, SEC-B)</small>
+                    </div>
+                    <div>
+                      <span class="badge-soft badge-soft-success me-2">Achievement: 82%</span>
+                      <span class="badge-soft badge-soft-warning">Benchmark: 75%</span>
+                    </div>
+                  </div>
+                  <div class="chart-wrapper">
+                    <canvas id="chart-lo-cs231-1"></canvas>
+                  </div>
+                </div>
+
+                <!-- LO-CS231-2 Chart -->
+                <div class="chart-container">
+                  <div class="chart-label">
+                    <div>
+                      <strong>LO-CS231-2:</strong> Implement data structures
+                      <small class="text-muted ms-2">(CS231, SEC-B)</small>
+                    </div>
+                    <div>
+                      <span class="badge-soft badge-soft-danger me-2">Achievement: 68%</span>
+                      <span class="badge-soft badge-soft-warning">Benchmark: 80%</span>
+                    </div>
+                  </div>
+                  <div class="chart-wrapper">
+                    <canvas id="chart-lo-cs231-2"></canvas>
+                  </div>
+                </div>
+
+                <!-- LO-CS231-3 Chart -->
+                <div class="chart-container">
+                  <div class="chart-label">
+                    <div>
+                      <strong>LO-CS231-3:</strong> Design appropriate structures
+                      <small class="text-muted ms-2">(CS231, SEC-B)</small>
+                    </div>
+                    <div>
+                      <span class="badge-soft badge-soft-danger me-2">Achievement: 64%</span>
+                      <span class="badge-soft badge-soft-warning">Benchmark: 70%</span>
+                    </div>
+                  </div>
+                  <div class="chart-wrapper">
+                    <canvas id="chart-lo-cs231-3"></canvas>
+                  </div>
+                </div>
+
+                <!-- LO-CS101-1 Chart -->
+                <div class="chart-container">
+                  <div class="chart-label">
+                    <div>
+                      <strong>LO-CS101-1:</strong> Write basic programs
+                      <small class="text-muted ms-2">(CS101, SEC-A)</small>
+                    </div>
+                    <div>
+                      <span class="badge-soft badge-soft-success me-2">Achievement: 79%</span>
+                      <span class="badge-soft badge-soft-warning">Benchmark: 70%</span>
+                    </div>
+                  </div>
+                  <div class="chart-wrapper">
+                    <canvas id="chart-lo-cs101-1"></canvas>
+                  </div>
+                </div>
+
+                <small class="text-muted d-block mt-3">
+                  Achievement rates are calculated from student grades and compared against defined benchmarks.
+                  Green bars indicate benchmarks met, red bars indicate below benchmark.
+                </small>
+              </div>
+            </div>
+
+            <!-- AI Insights -->
+            <div class="card-elevated">
+              <div class="card-elevated-header">
+                <h6>AI Insights on Performance (Powered by Gemini)</h6>
+                <button class="btn btn-sm btn-primary" type="button" onclick="generateAIInsights()">
+                  <i class="fa fa-robot me-1"></i>Generate AI Insights
+                </button>
+              </div>
+              <div class="card-elevated-body">
+                <!-- Loading state -->
+                <div class="ai-loading" id="aiLoading">
+                  <i class="fa fa-spinner fa-spin fa-2x mb-2"></i>
+                  <p class="mb-0">Analyzing performance data with Gemini AI...</p>
+                </div>
+
+                <!-- AI Insights Content (static fake data) -->
+                <div class="ai-insights-content" id="aiInsightsContent">
+                  <div class="mb-3">
+                    <h6 class="text-primary mb-2">
+                      <i class="fa fa-lightbulb me-2"></i>Performance Summary
+                    </h6>
+                    <p>
+                     data will be shown here
+                    </p>
+                  </div>
+
+                
+                  
+              
+                  <div class="mt-3 pt-3 border-top">
+                   
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- Footer Start -->
+  <div class="container-fluid bg-dark text-light footer pt-5 mt-5">
+   
+    <div class="container">
+      <div class="copyright">
+        <div class="row">
+          <div class="col-md-6 text-center text-md-start mb-3 mb-md-0">
+            &copy; <a class="border-bottom" href="../index.html">AUTOCLO</a>, All Right Reserved.
+          </div>
+          
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Footer End -->
+
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
+  <script src="js/performance.js"></script>
+
+</body>
+
+</html>

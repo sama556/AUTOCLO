@@ -1,0 +1,522 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <title>Learning Outcomes &amp; Benchmarks - AUTOCLO</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description"
+    content="Manage learning outcomes and link each LO to its benchmarks for assigned courses. Static demo data in English.">
+
+  <link href="../img/AUTOCLO LOGO.png" rel="icon">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&display=swap"
+    rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css"
+    rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css"
+    rel="stylesheet">
+  <link href="../css/bootstrap.min.css" rel="stylesheet">
+  <link href="../css/style.css" rel="stylesheet">
+  <link href="../css/new-style.css" rel="stylesheet">
+  <link href="css/dashboard.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
+</head>
+
+<body>
+  <!-- Navbar Start -->
+  <nav class="navbar navbar-expand-lg bg-white navbar-light shadow sticky-top p-0">
+    <a href="../index.html" class="navbar-brand d-flex align-items-center px-4 px-lg-5">
+      <img src="../img/AUTOCLO LOGO.png" alt="AUTOCLO" height="40" class="me-2"><span
+        class="text-dark fw-bold">AUTOCLO</span>
+    </a>
+    <button type="button" class="navbar-toggler me-4" data-bs-toggle="collapse"
+      data-bs-target="#navbarCollapse">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    
+    </div>
+  </nav>
+  <!-- Navbar End -->
+
+  <main class="dashboard-wrapper">
+    <div class="container-fluid">
+      <div class="dashboard-layout">
+        <!-- Sidebar -->
+        <aside class="dashboard-sidebar">
+          <div class="sidebar-header">
+            <div class="avatar">
+              <span>IN</span>
+            </div>
+            <div>
+              <strong class="sidebar-name">Dr. Instructor Name</strong>
+              <small class="sidebar-meta">Computer Science · AUTOCLO</small>
+            </div>
+          </div>
+          <nav class="sidebar-nav">
+            <a class="sidebar-link" href="dashboard.html">
+              <i class="fa fa-tachometer-alt"></i>
+              <span>Overview</span>
+            </a>
+            <a class="sidebar-link active" href="los.html">
+              <i class="fa fa-bullseye"></i>
+              <span>Learning Outcomes</span>
+            </a>
+            <a class="sidebar-link" href="assessments.html">
+              <i class="fa fa-clipboard-check"></i>
+              <span>Assessments &amp; Grades</span>
+            </a>
+            <a class="sidebar-link" href="grades-entry.html">
+              <i class="fa fa-edit"></i>
+              <span>Grades Entry</span>
+            </a>
+            <a class="sidebar-link" href="performance.html">
+              <i class="fa fa-chart-line"></i>
+              <span>Performance Analysis</span>
+            </a>
+            <a class="sidebar-link" href="reports.html">
+              <i class="fa fa-file-alt"></i>
+              <span>OBE Reports</span>
+            </a>
+            <a class="sidebar-link" href="career.html">
+              <i class="fa fa-user-graduate"></i>
+              <span>Career Recommendations</span>
+            </a>
+           
+          </nav>
+          <button class="sidebar-logout" type="button" onclick="handleLogout()">
+            <i class="fa fa-sign-out-alt me-2"></i>Logout
+          </button>
+        </aside>
+
+        <!-- Main content -->
+        <div class="dashboard-main">
+          <section class="dashboard-section">
+            <div class="dashboard-section-header">
+              <div>
+                <h5><i class="fa fa-bullseye me-2"></i>Manage Learning Outcomes &amp; Benchmarks</h5>
+               
+              </div>
+              <button class="btn btn-primary" type="button" data-bs-toggle="modal" data-bs-target="#addLoModal">
+                <i class="fa fa-plus me-2"></i>Add Learning Outcome
+              </button>
+            </div>
+
+            <!-- Course-level LOs Table -->
+            <div class="card-elevated mb-4">
+              <div class="card-elevated-header">
+                <h6>Learning Outcomes per Course</h6>
+              </div>
+              <div class="card-elevated-body table-responsive">
+                <table class="table table-dashboard table-sm align-middle mb-0">
+                  <thead>
+                    <tr>
+                      <th>LO ID</th>
+                      <th>Course ID</th>
+                      <th>LO Title</th>
+                      <th>LO Description</th>
+                      <th>Actions</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td><span class="fw-semibold">231</span></td>
+                      <td><span class="badge-soft badge-soft-info">CS231</span></td>
+                      <td><strong>Analyze algorithm complexity</strong></td>
+                      <td>
+                        <small class="text-muted d-block">
+                          Students can compute and compare time and space complexity for common algorithms.
+                        </small>
+                      </td>
+                      <td class="text-nowrap">
+                        <button class="btn btn-sm btn-outline-info btn-action" type="button"
+                          data-bs-toggle="modal" data-bs-target="#editLoModal"
+                          onclick="openEditLoModal('LO-CS231-1', 'CS231', 'Analyze algorithm complexity', 'Students can compute and compare time and space complexity for common algorithms.')">
+                          <i class="fa fa-edit me-1"></i>Edit LO
+                        </button>
+                        <button class="btn btn-sm btn-outline-danger btn-action" type="button"
+                          onclick="deleteLo('LO-CS231-1')">
+                          <i class="fa fa-trash me-1"></i>Delete
+                        </button>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td><span class="fw-semibold">235</span></td>
+                      <td><span class="badge-soft badge-soft-info">CS231</span></td>
+                      <td><strong>Implement data structures</strong></td>
+                      <td>
+                        <small class="text-muted d-block">
+                          Students can implement and test linear, tree, and hash-based data structures.
+                        </small>
+                      </td>
+                      <td class="text-nowrap">
+                        <button class="btn btn-sm btn-outline-info btn-action" type="button"
+                          data-bs-toggle="modal" data-bs-target="#editLoModal"
+                          onclick="openEditLoModal('LO-CS231-2', 'CS231', 'Implement data structures', 'Students can implement and test linear, tree, and hash-based data structures.')">
+                          <i class="fa fa-edit me-1"></i>Edit LO
+                        </button>
+                        <button class="btn btn-sm btn-outline-danger btn-action" type="button"
+                          onclick="deleteLo('LO-CS231-2')">
+                          <i class="fa fa-trash me-1"></i>Delete
+                        </button>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td><span class="fw-semibold">238</span></td>
+                      <td><span class="badge-soft badge-soft-info">CS231</span></td>
+                      <td><strong>Design appropriate structures</strong></td>
+                      <td>
+                        <small class="text-muted d-block">
+                          Students can select and design appropriate data structures for a given problem.
+                        </small>
+                      </td>
+                      <td class="text-nowrap">
+                        <button class="btn btn-sm btn-outline-info btn-action" type="button"
+                          data-bs-toggle="modal" data-bs-target="#editLoModal"
+                          onclick="openEditLoModal('LO-CS231-3', 'CS231', 'Design appropriate structures', 'Students can select and design appropriate data structures for a given problem.')">
+                          <i class="fa fa-edit me-1"></i>Edit LO
+                        </button>
+                        <button class="btn btn-sm btn-outline-danger btn-action" type="button"
+                          onclick="deleteLo('LO-CS231-3')">
+                          <i class="fa fa-trash me-1"></i>Delete
+                        </button>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td><span class="fw-semibold">101</span></td>
+                      <td><span class="badge-soft badge-soft-info">CS101</span></td>
+                      <td><strong>Write basic programs</strong></td>
+                      <td>
+                        <small class="text-muted d-block">
+                          Students can write small programs using variables, control structures, and functions.
+                        </small>
+                      </td>
+                      <td class="text-nowrap">
+                        <button class="btn btn-sm btn-outline-info btn-action" type="button"
+                          data-bs-toggle="modal" data-bs-target="#editLoModal"
+                          onclick="openEditLoModal('LO-CS101-1', 'CS101', 'Write basic programs', 'Students can write small programs using variables, control structures, and functions.')">
+                          <i class="fa fa-edit me-1"></i>Edit LO
+                        </button>
+                        <button class="btn btn-sm btn-outline-danger btn-action" type="button"
+                          onclick="deleteLo('LO-CS101-1')">
+                          <i class="fa fa-trash me-1"></i>Delete
+                        </button>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+                
+              </div>
+            </div>
+          </section>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- Benchmark Row Template (hidden) -->
+  <template id="benchmarkRowTemplate">
+    <div class="benchmark-row">
+      <button type="button" class="btn btn-sm btn-outline-danger btn-remove-benchmark" onclick="removeBenchmarkRow(this)">
+        <i class="fa fa-times"></i>
+      </button>
+      <div class="row g-3">
+        <div class="col-md-4">
+          <label class="form-label">Benchmark Name <span class="text-danger">*</span></label>
+          <input type="text" class="form-control benchmark-name" placeholder="e.g., Project pass rate" required>
+        </div>
+        <div class="col-md-3">
+          <label class="form-label">Type <span class="text-danger">*</span></label>
+          <select class="form-select benchmark-type" required>
+            <option value="">Select Type</option>
+            <option value="Percentage">Percentage</option>
+            <option value="Average">Average</option>
+            <option value="Min-Max">Min-Max</option>
+          </select>
+        </div>
+        <div class="col-md-5">
+          <label class="form-label">Value <span class="text-danger">*</span></label>
+          <input type="text" class="form-control benchmark-value" placeholder="e.g., At least 80% of students score ≥ 75%" required>
+        </div>
+      </div>
+    </div>
+  </template>
+
+  <!-- Add LO Modal -->
+  <div class="modal fade" id="addLoModal" tabindex="-1" aria-labelledby="addLoModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="addLoModalLabel"><i class="fa fa-plus me-2"></i>Add New Learning Outcome</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <form id="addLoForm">
+            <div class="mb-3">
+              <label for="addLoCourseId" class="form-label">Course ID <span class="text-danger">*</span></label>
+              <select class="form-select" id="addLoCourseId" required>
+                <option value="">Select Course</option>
+                <option value="CS231">CS231 - Data Structures</option>
+                <option value="CS101">CS101 - Introduction to Programming</option>
+                <option value="CS201">CS201 - Algorithms</option>
+              </select>
+            </div>
+            <div class="mb-3">
+              <label for="addLoTitle" class="form-label">LO Title <span class="text-danger">*</span></label>
+              <input type="text" class="form-control" id="addLoTitle" placeholder="Enter learning outcome title" required>
+            </div>
+            <div class="mb-3">
+              <label for="addLoDescription" class="form-label">LO Description <span class="text-danger">*</span></label>
+              <textarea class="form-control" id="addLoDescription" rows="3" placeholder="Enter learning outcome description" required></textarea>
+            </div>
+            <div class="mb-3">
+              <label class="form-label">Benchmarks</label>
+              <div id="addLoBenchmarksContainer"></div>
+              <button type="button" class="btn btn-sm btn-outline-primary" onclick="addBenchmarkRow('addLoBenchmarksContainer')">
+                <i class="fa fa-plus me-1"></i>Add Benchmark
+              </button>
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+          <button type="button" class="btn btn-primary" onclick="saveNewLo()">
+            <i class="fa fa-save me-2"></i>Save Learning Outcome
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Edit LO Modal -->
+  <div class="modal fade" id="editLoModal" tabindex="-1" aria-labelledby="editLoModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="editLoModalLabel"><i class="fa fa-edit me-2"></i>Edit Learning Outcome</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <form id="editLoForm">
+            <input type="hidden" id="editLoId">
+            <div class="mb-3">
+              <label for="editLoCourseId" class="form-label">Course ID <span class="text-danger">*</span></label>
+              <select class="form-select" id="editLoCourseId" required>
+                <option value="">Select Course</option>
+                <option value="CS231">CS231 - Data Structures</option>
+                <option value="CS101">CS101 - Introduction to Programming</option>
+                <option value="CS201">CS201 - Algorithms</option>
+              </select>
+            </div>
+            <div class="mb-3">
+              <label for="editLoTitle" class="form-label">LO Title <span class="text-danger">*</span></label>
+              <input type="text" class="form-control" id="editLoTitle" placeholder="Enter learning outcome title" required>
+            </div>
+            <div class="mb-3">
+              <label for="editLoDescription" class="form-label">LO Description <span class="text-danger">*</span></label>
+              <textarea class="form-control" id="editLoDescription" rows="3" placeholder="Enter learning outcome description" required></textarea>
+            </div>
+            <div class="mb-3">
+              <label class="form-label">Benchmarks for this LO</label>
+              <div id="editLoBenchmarksContainer"></div>
+              <button type="button" class="btn btn-sm btn-outline-primary mt-2"
+                onclick="addBenchmarkRow('editLoBenchmarksContainer')">
+                <i class="fa fa-plus me-1"></i>Add Benchmark
+              </button>
+              <small class="text-muted d-block mt-1">
+                Benchmark fields are static demo data. In a real system they would be loaded and saved from the database.
+              </small>
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+          <button type="button" class="btn btn-primary" onclick="saveEditLo()">
+            <i class="fa fa-save me-2"></i>Update Learning Outcome
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Preset Benchmarks (hidden, used to prefill edit form) -->
+  <div id="presetBenchmarks" style="display: none;">
+    <!-- Benchmarks for LO-CS231-1 -->
+    <div class="benchmark-row" data-lo-id="LO-CS231-1">
+      <button type="button" class="btn btn-sm btn-outline-danger btn-remove-benchmark" onclick="removeBenchmarkRow(this)">
+        <i class="fa fa-times"></i>
+      </button>
+      <div class="row g-3">
+        <div class="col-md-4">
+          <label class="form-label">Benchmark Name <span class="text-danger">*</span></label>
+          <input type="text" class="form-control benchmark-name" value="Complexity analysis exam" required>
+        </div>
+        <div class="col-md-3">
+          <label class="form-label">Type <span class="text-danger">*</span></label>
+          <select class="form-select benchmark-type" required>
+            <option value="">Select Type</option>
+            <option value="Percentage" selected>Percentage</option>
+            <option value="Average">Average</option>
+            <option value="Min-Max">Min-Max</option>
+          </select>
+        </div>
+        <div class="col-md-5">
+          <label class="form-label">Value <span class="text-danger">*</span></label>
+          <input type="text" class="form-control benchmark-value" value="At least 75% of students score ≥ 70%" required>
+        </div>
+      </div>
+    </div>
+    <!-- Benchmarks for LO-CS231-2 -->
+    <div class="benchmark-row" data-lo-id="LO-CS231-2">
+      <button type="button" class="btn btn-sm btn-outline-danger btn-remove-benchmark" onclick="removeBenchmarkRow(this)">
+        <i class="fa fa-times"></i>
+      </button>
+      <div class="row g-3">
+        <div class="col-md-4">
+          <label class="form-label">Benchmark Name <span class="text-danger">*</span></label>
+          <input type="text" class="form-control benchmark-name" value="Project pass rate" required>
+        </div>
+        <div class="col-md-3">
+          <label class="form-label">Type <span class="text-danger">*</span></label>
+          <select class="form-select benchmark-type" required>
+            <option value="">Select Type</option>
+            <option value="Percentage" selected>Percentage</option>
+            <option value="Average">Average</option>
+            <option value="Min-Max">Min-Max</option>
+          </select>
+        </div>
+        <div class="col-md-5">
+          <label class="form-label">Value <span class="text-danger">*</span></label>
+          <input type="text" class="form-control benchmark-value" value="At least 80% of students score ≥ 75%" required>
+        </div>
+      </div>
+    </div>
+    <div class="benchmark-row" data-lo-id="LO-CS231-2">
+      <button type="button" class="btn btn-sm btn-outline-danger btn-remove-benchmark" onclick="removeBenchmarkRow(this)">
+        <i class="fa fa-times"></i>
+      </button>
+      <div class="row g-3">
+        <div class="col-md-4">
+          <label class="form-label">Benchmark Name <span class="text-danger">*</span></label>
+          <input type="text" class="form-control benchmark-name" value="Average project score" required>
+        </div>
+        <div class="col-md-3">
+          <label class="form-label">Type <span class="text-danger">*</span></label>
+          <select class="form-select benchmark-type" required>
+            <option value="">Select Type</option>
+            <option value="Percentage">Percentage</option>
+            <option value="Average" selected>Average</option>
+            <option value="Min-Max">Min-Max</option>
+          </select>
+        </div>
+        <div class="col-md-5">
+          <label class="form-label">Value <span class="text-danger">*</span></label>
+          <input type="text" class="form-control benchmark-value" value="Average score ≥ 70%" required>
+        </div>
+      </div>
+    </div>
+    <div class="benchmark-row" data-lo-id="LO-CS231-2">
+      <button type="button" class="btn btn-sm btn-outline-danger btn-remove-benchmark" onclick="removeBenchmarkRow(this)">
+        <i class="fa fa-times"></i>
+      </button>
+      <div class="row g-3">
+        <div class="col-md-4">
+          <label class="form-label">Benchmark Name <span class="text-danger">*</span></label>
+          <input type="text" class="form-control benchmark-name" value="Quiz design questions" required>
+        </div>
+        <div class="col-md-3">
+          <label class="form-label">Type <span class="text-danger">*</span></label>
+          <select class="form-select benchmark-type" required>
+            <option value="">Select Type</option>
+            <option value="Percentage">Percentage</option>
+            <option value="Average">Average</option>
+            <option value="Min-Max" selected>Min-Max</option>
+          </select>
+        </div>
+        <div class="col-md-5">
+          <label class="form-label">Value <span class="text-danger">*</span></label>
+          <input type="text" class="form-control benchmark-value" value="Score between 60% and 100%" required>
+        </div>
+      </div>
+    </div>
+    <!-- Benchmarks for LO-CS231-3 -->
+    <div class="benchmark-row" data-lo-id="LO-CS231-3">
+      <button type="button" class="btn btn-sm btn-outline-danger btn-remove-benchmark" onclick="removeBenchmarkRow(this)">
+        <i class="fa fa-times"></i>
+      </button>
+      <div class="row g-3">
+        <div class="col-md-4">
+          <label class="form-label">Benchmark Name <span class="text-danger">*</span></label>
+          <input type="text" class="form-control benchmark-name" value="Design assignment completion" required>
+        </div>
+        <div class="col-md-3">
+          <label class="form-label">Type <span class="text-danger">*</span></label>
+          <select class="form-select benchmark-type" required>
+            <option value="">Select Type</option>
+            <option value="Percentage" selected>Percentage</option>
+            <option value="Average">Average</option>
+            <option value="Min-Max">Min-Max</option>
+          </select>
+        </div>
+        <div class="col-md-5">
+          <label class="form-label">Value <span class="text-danger">*</span></label>
+          <input type="text" class="form-control benchmark-value" value="At least 70% of students complete successfully" required>
+        </div>
+      </div>
+    </div>
+    <!-- Benchmarks for LO-CS101-1 -->
+    <div class="benchmark-row" data-lo-id="LO-CS101-1">
+      <button type="button" class="btn btn-sm btn-outline-danger btn-remove-benchmark" onclick="removeBenchmarkRow(this)">
+        <i class="fa fa-times"></i>
+      </button>
+      <div class="row g-3">
+        <div class="col-md-4">
+          <label class="form-label">Benchmark Name <span class="text-danger">*</span></label>
+          <input type="text" class="form-control benchmark-name" value="Basic program correctness" required>
+        </div>
+        <div class="col-md-3">
+          <label class="form-label">Type <span class="text-danger">*</span></label>
+          <select class="form-select benchmark-type" required>
+            <option value="">Select Type</option>
+            <option value="Percentage" selected>Percentage</option>
+            <option value="Average">Average</option>
+            <option value="Min-Max">Min-Max</option>
+          </select>
+        </div>
+        <div class="col-md-5">
+          <label class="form-label">Value <span class="text-danger">*</span></label>
+          <input type="text" class="form-control benchmark-value" value="At least 85% of students write correct programs" required>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer Start -->
+  <div class="container-fluid bg-dark text-light footer pt-5 mt-5">
+   
+    <div class="container">
+      <div class="copyright">
+        <div class="row">
+          <div class="col-md-6 text-center text-md-start mb-3 mb-md-0">
+            &copy; <a class="border-bottom" href="../index.html">AUTOCLO</a>, All Right Reserved.
+          </div>
+         
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Footer End -->
+
+  <a href="#" class="btn btn-lg btn-primary btn-lg-square back-to-top"><i
+      class="bi bi-arrow-up"></i></a>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
+  <script src="js/los.js"></script>
+ 
+</body>
+
+</html>

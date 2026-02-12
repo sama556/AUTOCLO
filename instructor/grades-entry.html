@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <title>Grades Entry - AUTOCLO</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description"
+    content="Enter and manage student grades for assessments. Static demo data in English based on the Grades table.">
+
+  <link href="../img/AUTOCLO LOGO.png" rel="icon">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&display=swap"
+    rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css"
+    rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css"
+    rel="stylesheet">
+  <link href="../css/bootstrap.min.css" rel="stylesheet">
+  <link href="../css/style.css" rel="stylesheet">
+  <link href="../css/new-style.css" rel="stylesheet">
+  <link href="css/dashboard.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
+  <style>
+    .grade-input {
+      width: 80px;
+      text-align: center;
+      padding: 0.25rem 0.5rem;
+      border: 1px solid rgba(52, 73, 69, 0.3);
+      border-radius: 4px;
+    }
+    .grade-input:focus {
+      border-color: var(--viridian, #344945);
+      outline: none;
+      box-shadow: 0 0 0 2px rgba(52, 73, 69, 0.1);
+    }
+    .grade-cell {
+      text-align: center;
+      vertical-align: middle;
+    }
+    .student-name-cell {
+      font-weight: 600;
+    }
+    .max-grade-label {
+      font-size: 0.75rem;
+      color: rgba(52, 73, 69, 0.6);
+      font-weight: normal;
+    }
+  </style>
+</head>
+
+<body>
+  <!-- Navbar Start -->
+  <nav class="navbar navbar-expand-lg bg-white navbar-light shadow sticky-top p-0">
+    <a href="../index.html" class="navbar-brand d-flex align-items-center px-4 px-lg-5">
+      <img src="../img/AUTOCLO LOGO.png" alt="AUTOCLO" height="40" class="me-2"><span
+        class="text-dark fw-bold">AUTOCLO</span>
+    </a>
+    <button type="button" class="navbar-toggler me-4" data-bs-toggle="collapse"
+      data-bs-target="#navbarCollapse">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+   
+    </div>
+  </nav>
+  <!-- Navbar End -->
+
+  <main class="dashboard-wrapper">
+    <div class="container-fluid">
+      <div class="dashboard-layout">
+        <!-- Sidebar -->
+        <aside class="dashboard-sidebar">
+          <div class="sidebar-header">
+            <div class="avatar">
+              <span>IN</span>
+            </div>
+            <div>
+              <strong class="sidebar-name">Dr. Instructor Name</strong>
+              <small class="sidebar-meta">Computer Science · AUTOCLO</small>
+            </div>
+          </div>
+          <nav class="sidebar-nav">
+            <a class="sidebar-link" href="dashboard.html">
+              <i class="fa fa-tachometer-alt"></i>
+              <span>Overview</span>
+            </a>
+            <a class="sidebar-link" href="los.html">
+              <i class="fa fa-bullseye"></i>
+              <span>Learning Outcomes</span>
+            </a>
+            <a class="sidebar-link" href="assessments.html">
+              <i class="fa fa-clipboard-check"></i>
+              <span>Assessments &amp; Grades</span>
+            </a>
+            <a class="sidebar-link active" href="grades-entry.html">
+              <i class="fa fa-pen"></i>
+              <span>Grades Entry</span>
+            </a>
+            <a class="sidebar-link" href="performance.html">
+              <i class="fa fa-chart-line"></i>
+              <span>Performance Analysis</span>
+            </a>
+            <a class="sidebar-link" href="reports.html">
+              <i class="fa fa-file-alt"></i>
+              <span>OBE Reports</span>
+            </a>
+            <a class="sidebar-link" href="career.html">
+              <i class="fa fa-user-graduate"></i>
+              <span>Career Recommendations</span>
+            </a>
+           
+          </nav>
+          <button class="sidebar-logout" type="button" onclick="handleLogout()">
+            <i class="fa fa-sign-out-alt me-2"></i>Logout
+          </button>
+        </aside>
+
+        <!-- Main content -->
+        <div class="dashboard-main">
+          <section class="dashboard-section">
+            <div class="dashboard-section-header">
+              <div>
+                <h5><i class="fa fa-pen me-2"></i>Grades Entry</h5>
+               
+              </div>
+              <div>
+                <button class="btn btn-success me-2" type="button" onclick="saveAllGrades()">
+                  <i class="fa fa-save me-2"></i>Save All Grades
+                </button>
+                <button class="btn btn-outline-secondary" type="button" onclick="resetAllGrades()">
+                  <i class="fa fa-undo me-2"></i>Reset Changes
+                </button>
+              </div>
+            </div>
+
+            <!-- Course/Section Selector -->
+            <div class="card-elevated mb-4">
+              <div class="card-elevated-header">
+                <h6>Select Course &amp; Section</h6>
+              </div>
+              <div class="card-elevated-body">
+                <div class="row g-3">
+                  <div class="col-md-4">
+                    <label class="form-label">Course</label>
+                    <select class="form-select" id="courseSelector" onchange="loadGradesTable()">
+                      <option value="">Select Course</option>
+                      <option value="CS231" selected>CS231 - Data Structures</option>
+                      <option value="CS101">CS101 - Introduction to Programming</option>
+                      <option value="CS341">CS341 - Database Systems</option>
+                    </select>
+                  </div>
+                  <div class="col-md-4">
+                    <label class="form-label">Section</label>
+                    <select class="form-select" id="sectionSelector" onchange="loadGradesTable()">
+                      <option value="">Select Section</option>
+                      <option value="SEC-B" selected>SEC-B</option>
+                      <option value="SEC-A">SEC-A</option>
+                      <option value="SEC-C">SEC-C</option>
+                    </select>
+                  </div>
+                  <div class="col-md-4">
+                    <label class="form-label">Semester</label>
+                    <input type="text" class="form-control" value="Fall 2026" readonly>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Grades Entry Table -->
+            <div class="card-elevated">
+              <div class="card-elevated-header">
+                <h6>Student Grades Entry Table</h6>
+                <small class="text-muted">Click on any grade cell to edit. Press Enter or Tab to move to next cell.</small>
+              </div>
+              <div class="card-elevated-body table-responsive">
+                <table class="table table-dashboard table-sm align-middle mb-0">
+                  <thead>
+                    <tr>
+                      <th style="position: sticky; left: 0; background: var(--sky, #D5E3E8); z-index: 10;">Student ID</th>
+                      <th style="position: sticky; left: 80px; background: var(--sky, #D5E3E8); z-index: 10;">Student Name</th>
+                      <th class="grade-cell">
+                        Assignment 1 – Basics<br>
+                        <small class="max-grade-label">Max: 20</small>
+                      </th>
+                      <th class="grade-cell">
+                        Midterm Exam<br>
+                        <small class="max-grade-label">Max: 60</small>
+                      </th>
+                      <th class="grade-cell">
+                        Final Project<br>
+                        <small class="max-grade-label">Max: 100</small>
+                      </th>
+                      <th class="grade-cell">Total</th>
+                      <th class="grade-cell">Actions</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td style="position: sticky; left: 0; background: #fff; z-index: 5;"><span class="fw-semibold">STU-1001</span></td>
+                      <td style="position: sticky; left: 80px; background: #fff; z-index: 5;" class="student-name-cell">Ali Ahmed</td>
+                      <td class="grade-cell">
+                        <input type="number" class="form-control grade-input" 
+                          value="18" min="0" max="20" 
+                          data-student-id="STU-1001" 
+                          data-assessment-id="AS-CS101-01"
+                          data-grade-id="GR-0001">
+                      </td>
+                      <td class="grade-cell">
+                        <input type="number" class="form-control grade-input" 
+                          value="54" min="0" max="60" 
+                          data-student-id="STU-1001" 
+                          data-assessment-id="AS-CS231-02"
+                          data-grade-id="GR-0002">
+                      </td>
+                      <td class="grade-cell">
+                        <input type="number" class="form-control grade-input" 
+                          value="" min="0" max="100" 
+                          data-student-id="STU-1001" 
+                          data-assessment-id="AS-CS231-03"
+                          data-grade-id="">
+                      </td>
+                      <td class="grade-cell">
+                        <span class="fw-semibold total-grade" data-student-id="STU-1001">72</span>
+                      </td>
+                      <td class="grade-cell">
+                        <button class="btn btn-sm btn-outline-primary" type="button" 
+                          onclick="saveStudentGrades('STU-1001')">
+                          <i class="fa fa-save me-1"></i>Save
+                        </button>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td style="position: sticky; left: 0; background: #fff; z-index: 5;"><span class="fw-semibold">STU-1002</span></td>
+                      <td style="position: sticky; left: 80px; background: #fff; z-index: 5;" class="student-name-cell">Sara Khalid</td>
+                      <td class="grade-cell">
+                        <input type="number" class="form-control grade-input" 
+                          value="16" min="0" max="20" 
+                          data-student-id="STU-1002" 
+                          data-assessment-id="AS-CS101-01"
+                          data-grade-id="GR-0003">
+                      </td>
+                      <td class="grade-cell">
+                        <input type="number" class="form-control grade-input" 
+                          value="48" min="0" max="60" 
+                          data-student-id="STU-1002" 
+                          data-assessment-id="AS-CS231-02"
+                          data-grade-id="GR-0004">
+                      </td>
+                      <td class="grade-cell">
+                        <input type="number" class="form-control grade-input" 
+                          value="" min="0" max="100" 
+                          data-student-id="STU-1002" 
+                          data-assessment-id="AS-CS231-03"
+                          data-grade-id="">
+                      </td>
+                      <td class="grade-cell">
+                        <span class="fw-semibold total-grade" data-student-id="STU-1002">64</span>
+                      </td>
+                      <td class="grade-cell">
+                        <button class="btn btn-sm btn-outline-primary" type="button" 
+                          onclick="saveStudentGrades('STU-1002')">
+                          <i class="fa fa-save me-1"></i>Save
+                        </button>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td style="position: sticky; left: 0; background: #fff; z-index: 5;"><span class="fw-semibold">STU-1003</span></td>
+                      <td style="position: sticky; left: 80px; background: #fff; z-index: 5;" class="student-name-cell">Mohammed Ali</td>
+                      <td class="grade-cell">
+                        <input type="number" class="form-control grade-input" 
+                          value="15" min="0" max="20" 
+                          data-student-id="STU-1003" 
+                          data-assessment-id="AS-CS101-01"
+                          data-grade-id="GR-0005">
+                      </td>
+                      <td class="grade-cell">
+                        <input type="number" class="form-control grade-input" 
+                          value="39" min="0" max="60" 
+                          data-student-id="STU-1003" 
+                          data-assessment-id="AS-CS231-02"
+                          data-grade-id="GR-0006">
+                      </td>
+                      <td class="grade-cell">
+                        <input type="number" class="form-control grade-input" 
+                          value="" min="0" max="100" 
+                          data-student-id="STU-1003" 
+                          data-assessment-id="AS-CS231-03"
+                          data-grade-id="">
+                      </td>
+                      <td class="grade-cell">
+                        <span class="fw-semibold total-grade" data-student-id="STU-1003">54</span>
+                      </td>
+                      <td class="grade-cell">
+                        <button class="btn btn-sm btn-outline-primary" type="button" 
+                          onclick="saveStudentGrades('STU-1003')">
+                          <i class="fa fa-save me-1"></i>Save
+                        </button>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td style="position: sticky; left: 0; background: #fff; z-index: 5;"><span class="fw-semibold">STU-1004</span></td>
+                      <td style="position: sticky; left: 80px; background: #fff; z-index: 5;" class="student-name-cell">Fatima Hassan</td>
+                      <td class="grade-cell">
+                        <input type="number" class="form-control grade-input" 
+                          value="20" min="0" max="20" 
+                          data-student-id="STU-1004" 
+                          data-assessment-id="AS-CS101-01"
+                          data-grade-id="GR-0007">
+                      </td>
+                      <td class="grade-cell">
+                        <input type="number" class="form-control grade-input" 
+                          value="58" min="0" max="60" 
+                          data-student-id="STU-1004" 
+                          data-assessment-id="AS-CS231-02"
+                          data-grade-id="GR-0008">
+                      </td>
+                      <td class="grade-cell">
+                        <input type="number" class="form-control grade-input" 
+                          value="" min="0" max="100" 
+                          data-student-id="STU-1004" 
+                          data-assessment-id="AS-CS231-03"
+                          data-grade-id="">
+                      </td>
+                      <td class="grade-cell">
+                        <span class="fw-semibold total-grade" data-student-id="STU-1004">78</span>
+                      </td>
+                      <td class="grade-cell">
+                        <button class="btn btn-sm btn-outline-primary" type="button" 
+                          onclick="saveStudentGrades('STU-1004')">
+                          <i class="fa fa-save me-1"></i>Save
+                        </button>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td style="position: sticky; left: 0; background: #fff; z-index: 5;"><span class="fw-semibold">STU-1005</span></td>
+                      <td style="position: sticky; left: 80px; background: #fff; z-index: 5;" class="student-name-cell">Omar Ibrahim</td>
+                      <td class="grade-cell">
+                        <input type="number" class="form-control grade-input" 
+                          value="17" min="0" max="20" 
+                          data-student-id="STU-1005" 
+                          data-assessment-id="AS-CS101-01"
+                          data-grade-id="GR-0009">
+                      </td>
+                      <td class="grade-cell">
+                        <input type="number" class="form-control grade-input" 
+                          value="45" min="0" max="60" 
+                          data-student-id="STU-1005" 
+                          data-assessment-id="AS-CS231-02"
+                          data-grade-id="GR-0010">
+                      </td>
+                      <td class="grade-cell">
+                        <input type="number" class="form-control grade-input" 
+                          value="" min="0" max="100" 
+                          data-student-id="STU-1005" 
+                          data-assessment-id="AS-CS231-03"
+                          data-grade-id="">
+                      </td>
+                      <td class="grade-cell">
+                        <span class="fw-semibold total-grade" data-student-id="STU-1005">62</span>
+                      </td>
+                      <td class="grade-cell">
+                        <button class="btn btn-sm btn-outline-primary" type="button" 
+                          onclick="saveStudentGrades('STU-1005')">
+                          <i class="fa fa-save me-1"></i>Save
+                        </button>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+                
+              </div>
+            </div>
+          </section>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- Footer Start -->
+  <div class="container-fluid bg-dark text-light footer pt-5 mt-5">
+   
+    <div class="container">
+      <div class="copyright">
+        <div class="row">
+          <div class="col-md-6 text-center text-md-start mb-3 mb-md-0">
+            &copy; <a class="border-bottom" href="../index.html">AUTOCLO</a>, All Right Reserved.
+          </div>
+          
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Footer End -->
+
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
+  <script src="js/grades-entry.js"></script>
+ 
+</body>
+
+</html>
