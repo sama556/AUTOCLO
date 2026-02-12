@@ -235,7 +235,7 @@
     height: 2px;
     top: 4px;
     left: -40px;
-    background: var(--primary);
+    background: #344945;
     z-index: -1;
 }
 
@@ -246,7 +246,7 @@
     height: 2px;
     bottom: 5px;
     left: -60px;
-    background: var(--primary);
+    background: #344945;
     z-index: -1;
 }
 

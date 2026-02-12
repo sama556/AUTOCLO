@@ -52,3 +52,9 @@ h1, .h1, h2, .h2, h3, .h3, h4, .h4, h5, .h5, h6, .h6 {
         .text-light {
             color: var(--shell) !important;
         }
+        .section-title::before {
+            background: #344945 !important;
+            }
+            .section-title::after{
+                background: #344945 !important;
+            }
